@@ -1,3 +1,5 @@
 .next
 .pnpm-store
+dist
+out
 node_modules

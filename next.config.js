@@ -1,7 +1,13 @@
-const withNextra = require('nextra')({
+/** @type {import('nextra').Nextra} */
+const nextra = require('nextra')
+
+module.exports = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
-  distDir: 'build',
+})({
+  // output: 'export',
+  // distDir: 'dist',
+  images: {
+    unoptimized: true,
+  }
 })
-
-module.exports = withNextra()

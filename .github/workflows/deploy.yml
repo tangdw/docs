@@ -1,0 +1,24 @@
+name: deno deploy
+
+on:
+  push:
+    branches:
+      - master # default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    permissions:
+      id-token: write # This is required to allow the GitHub Action to authenticate with Deno Deploy.
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm i pnpm -g
+      - run: pnpm install
+      - run: pnpm build
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: tdw
+          entrypoint: https://deno.land/std/http/file_server.ts
+          root: ./out
